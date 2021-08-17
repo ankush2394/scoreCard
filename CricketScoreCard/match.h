@@ -1,15 +1,16 @@
 #include "team.h"
 #include <vector>
 #include "winnerCalculator.h"
+#include "runCalculator.h"
 using namespace std;
 class match {
-public:
-
     int numOvers, numOfPLayers;
     int totalRuns, totalWickets;
     vector<int> team1Ids, team2Ids;
-    vector<team*> teams;   //match property is teams
-    winnerCalculator w;
+    vector<team*> teams;
+    runCalculator runcalculator;
+
+public:
 
     match(int numOfPLayers, int numOvers, vector<int> team1Pids, vector<int> team2Pids) {
         this->numOfPLayers = numOfPLayers;
@@ -49,12 +50,12 @@ public:
                 do {
                     cin >> val;
 
-                    executeOneBall(val, strikerEnd, battingTeam);
+                    runcalculator.executeOneBall(val, strikerEnd, battingTeam);
 
                     if(strikerEnd->isOutt()) {
-                        cout<<"striker id who is out is "<<strikerEnd->playerId<<endl;
+                        cout<<"striker id who is out is "<<strikerEnd->getPlayerId()<<endl;
                         strikerEnd = battingTeam->getOnStrikePlayer();
-                        cout<<"new on strike  is "<<strikerEnd->playerId<<endl;
+                        cout<<"new on strike  is "<<strikerEnd->getPlayerId()<<endl;
 
                     }
 
@@ -66,20 +67,20 @@ public:
 
                 swap(strikerEnd, offStrikerEnd);
 
-                cout << "over completed" << " on strike right now "<<strikerEnd->playerId<<" "<<strikerEnd->onStrike()<<endl;
-                cout << "over completed" << " off strike right now "<<offStrikerEnd->playerId<<" "<<offStrikerEnd->onStrike()<<endl;
+                cout << "over completed" << " on strike right now "<<strikerEnd->getPlayerId()<<" "<<strikerEnd->onStrike()<<endl;
+                cout << "over completed" << " off strike right now "<<offStrikerEnd->getPlayerId()<<" "<<offStrikerEnd->onStrike()<<endl;
 
-                cout<<battingTeam->runs<<" "<<battingTeam->wickets<<endl;
+                cout<<battingTeam->getRuns()<<" "<<battingTeam->getWickets()<<endl;
                 cout<<"player"<<" "<<"score"<< " "<<"4s"<<" "<<"6s"<<" "<<"Balls"<<endl;
-                for(int i=0;i<battingTeam->players.size();i++) {
-                    cout<<battingTeam->players[i]->playerId<<" "<<battingTeam->players[i]->runsScored<<" "<<
-                        battingTeam->players[i]->num4s<<" "<< battingTeam->players[i]->num6s<<" "<<battingTeam->players[i]->ballsFaced<<" "<<
-                        battingTeam->players[i]->isOutt()<<endl;
+                for(int i=0;i<battingTeam->getPlayers().size();i++) {
+                    cout<<battingTeam->getPlayers()[i]->getPlayerId()<<" "<<battingTeam->getPlayers()[i]->getRunsScored()<<" "<<
+                        battingTeam->getPlayers()[i]->get4s()<<" "<< battingTeam->getPlayers()[i]->get6s()<<" "<<battingTeam->getPlayers()[i]->getBallsFaced()<<" "<<
+                        battingTeam->getPlayers()[i]->isOutt()<<endl;
                 }
             }
             cout<<"INNINGS OVER"<<endl;
-            battingTeam->isBatting = false;
-            bowlingTeam->isBatting = true;
+            battingTeam->setBatting(false);
+            bowlingTeam->setBatting(true);
         } catch (const char * msg) {
             cout<<"all wickets down"<<endl;
         }
@@ -94,60 +95,17 @@ public:
     }
 
     team* getBattingTeam() {
-        if (teams[0]->isBatting) {
+        if (teams[0]->getBatting()) {
             return teams[0];
         }
         return teams[1];
     }
 
     team* getBowlingTeam() {
-        if (!teams[0]->isBatting) {
+        if (!teams[0]->getBatting()) {
             return teams[0];
         }
         return teams[1];
-    }
-
-
-    void executeOneBall(const string& ballState, player *striker, team *battingTeam) {
-
-        if(ballState == "1") {
-
-            striker->runsScored += 1;
-            striker->setBallsFaced(1);
-            battingTeam->runs += 1;
-
-        } else if(ballState == "2") {
-            striker->runsScored += 2;
-            striker->setBallsFaced(1);
-            battingTeam->runs += 2;
-
-        } else if(ballState == "3") {
-            striker->runsScored +=3;
-            striker->setBallsFaced(1);
-            battingTeam->runs += 3;
-
-        } else if(ballState == "4") {
-            striker->runsScored +=4;
-            striker->num4s +=1;
-            battingTeam->runs += 4;
-            striker->setBallsFaced(1);
-
-        } else if(ballState == "6") {
-            striker->runsScored +=6;
-            striker->num6s +=1;
-            battingTeam->runs += 6;
-            striker->setBallsFaced(1);
-
-        } else if(ballState == "W") {
-            striker->setOut(true);
-            battingTeam->wickets +=1;
-
-        } else if(ballState == "WD") {
-            battingTeam->runs += 1;
-
-        } else if(ballState == "NB") {
-            battingTeam->runs += 1;
-        }
     }
 
     bool shouldChangeStrike(string val) {
@@ -155,6 +113,17 @@ public:
             return true;
         }
         return false;
+    }
+
+    string getWinner() {
+        int ans = abs(teams[0]->getRuns()-teams[1]->getRuns());
+        if(teams[0]->getRuns()>teams[1]->getRuns()) {
+            return "team1 is winner by "+ to_string(ans)+" runs";
+        } else if(teams[0]->getRuns()<teams[1]->getRuns()) {
+            return "team2 is winner by "+ to_string(ans)+" runs";
+        } else {
+            return "tie";
+        }
     }
 
 };

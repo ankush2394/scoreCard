@@ -1,13 +1,11 @@
 #pragma once
 class player {
     bool isOut, isBatting ;
-public:
     int playerId, runsScored=0;
     int num4s = 0; int num6s = 0;
     int ballsFaced = 0;
     bool onPitch;
-
-    //make them private once everything done
+public:
 
     player(int pId, bool isOut , bool isBatting) {
         this->playerId = pId;
@@ -16,13 +14,26 @@ public:
         this->onPitch = false;
     }
 
-    int getRunsScored(int playerId) {
+    int getRunsScored() {
         return runsScored;
     }
 
     void setRuns(int runs) {
         runsScored+=runs;
         return;
+    }
+    void set4s(int x) {
+        num4s+=1;
+    }
+    void set6s(int x) {
+        num6s+=1;
+    }
+    int get4s() {
+        return num4s;
+    }
+
+    int get6s() {
+        return num6s;
     }
 
     void setOut(bool out) {
@@ -47,6 +58,18 @@ public:
 
     void setBatting(bool isBat) {
         isBatting = isBat;
+    }
+
+    void setOnPitch(bool x) {
+        onPitch = x;
+    }
+
+    bool getOnPitch() {
+        return onPitch;
+    }
+
+    int getPlayerId() {
+        return playerId;
     }
 
 };

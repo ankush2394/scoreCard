@@ -10,6 +10,4 @@ public:
     over(vector<string> balls) {
         this->ballsState = balls;
     }
-
-
 };
