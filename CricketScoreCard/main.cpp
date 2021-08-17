@@ -15,15 +15,6 @@ int main() {
     m.start();
     m.start();
 
-    vector<team*> teams = m.teams;
-    int ans = abs(teams[0]->runs-teams[1]->runs);
-    if(teams[0]->runs>teams[1]->runs) {
-        cout<<"team1 is winner by "<<ans<<" runs"<<endl;
-    } else if(teams[0]->runs<teams[1]->runs) {
-        cout<<"team2 is winner"<<ans<<" runs"<<endl;
-    } else {
-        cout<<"tie"<<endl;
-    }
-
+    cout<<m.getWinner();
     return 0;
 }

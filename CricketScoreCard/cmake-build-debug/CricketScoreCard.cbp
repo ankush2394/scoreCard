@@ -95,6 +95,9 @@
 		<Unit filename="/Users/olx/CLionProjects/CricketScoreCard/player.h">
 			<Option target="CricketScoreCard"/>
 		</Unit>
+		<Unit filename="/Users/olx/CLionProjects/CricketScoreCard/runCalculator.h">
+			<Option target="CricketScoreCard"/>
+		</Unit>
 		<Unit filename="/Users/olx/CLionProjects/CricketScoreCard/runs.h">
 			<Option target="CricketScoreCard"/>
 		</Unit>
