@@ -1,5 +1,4 @@
-#ifndef CRICKETSCORECARD_TEAM_H
-#define CRICKETSCORECARD_TEAM_H
+#pragma once
 
 #include "player.h"
 #include <vector>
@@ -10,7 +9,6 @@ class team {
 public:
     bool isBatting;
     int runs,wickets;
-    map<int, player> currentIdsOnPitch;
     vector<player*> players;
 
     team(vector<int> pIds, bool isBatt) {
@@ -65,5 +63,3 @@ public:
     //morality says always kep ur promises it binds you, wisdom says never make promises, it frees you
 
 };
-
-#endif

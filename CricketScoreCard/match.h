@@ -41,7 +41,6 @@ public:
         string val;
         team *battingTeam = getBattingTeam();
         team *bowlingTeam = getBowlingTeam();
-        //cout<<battingTeam->players[0];
         try {
             player *strikerEnd = battingTeam->getOnStrikePlayer();
             player *offStrikerEnd = battingTeam->getOffStrikePlayer();
@@ -67,8 +66,6 @@ public:
 
                 swap(strikerEnd, offStrikerEnd);
 
-                //offStrikerEnd->
-
                 cout << "over completed" << " on strike right now "<<strikerEnd->playerId<<" "<<strikerEnd->onStrike()<<endl;
                 cout << "over completed" << " off strike right now "<<offStrikerEnd->playerId<<" "<<offStrikerEnd->onStrike()<<endl;
 
@@ -87,17 +84,6 @@ public:
             cout<<"all wickets down"<<endl;
         }
 
-
-
-        //*************
-//        cout<<battingTeam.runs<<" "<<battingTeam.wickets<<endl;
-//        cout<<"player"<<" "<<"score"<< " "<<"4s"<<" "<<"6s"<<" "<<"Balls"<<endl;
-//        for(int i=0;i<battingTeam.players.size();i++) {
-//            cout<<battingTeam.players[i]->playerId<<" "<<battingTeam.players[i]->runsScored<<" "<<
-//            battingTeam.players[i]->num4s<<" "<< battingTeam.players[i]->num6s<<" "<<battingTeam.players[i]->ballsFaced<<" "<<
-//            battingTeam.players[i]->isOutt()<<endl;
-//        }
-        //*************
     }
 
     bool setNumber(string x) {

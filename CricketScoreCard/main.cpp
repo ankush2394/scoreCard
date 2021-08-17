@@ -3,7 +3,7 @@
 #include "over.h"
 #include "team.h"
 #include <vector>
-#include <math.h>
+#include <cmath>
 using namespace std;
 
 

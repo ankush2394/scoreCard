@@ -1,5 +1,4 @@
-#ifndef CRICKETSCORECARD_PLAYER_H
-#define CRICKETSCORECARD_PLAYER_H
+#pragma once
 class player {
     bool isOut, isBatting ;
 public:
@@ -51,7 +50,5 @@ public:
     }
 
 };
-
-#endif
 
 
