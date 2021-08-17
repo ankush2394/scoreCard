@@ -1,0 +1,3 @@
+/Users/olx/CLionProjects/CricketScoreCard/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/olx/CLionProjects/CricketScoreCard/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/olx/CLionProjects/CricketScoreCard/cmake-build-debug/CMakeFiles/CricketScoreCard.dir
